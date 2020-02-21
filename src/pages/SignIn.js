@@ -14,20 +14,9 @@ import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useAuth } from "../context/auth";
-import { API_ENDPOINT } from "./constant";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        HYPERTUBE
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { API_ENDPOINT } from "../constant";
+import Copyright from "../components/Copyright";
+import Oauth from "../components/Oauth";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -183,6 +172,7 @@ export default function SignIn(props) {
           </Grid>
         </form>
       </div>
+      <Oauth />
       <Box mt={8}>
         <Copyright />
       </Box>

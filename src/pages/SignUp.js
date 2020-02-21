@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,20 +12,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
-import { API_ENDPOINT } from "./constant";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        HYPERTUBE
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { API_ENDPOINT } from "../constant";
+import Copyright from "../components/Copyright";
+import Oauth from "../components/Oauth";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -234,6 +223,7 @@ export default function SignUp() {
           </Grid>
         </form>
       </div>
+      <Oauth />
       <Box mt={5}>
         <Copyright />
       </Box>

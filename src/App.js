@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import "./App.css";
 import Home from "./pages/Home";
@@ -10,6 +10,9 @@ import PrivateRoute from "./PrivateRoute";
 import ResetPassword from "./pages/PassReset";
 import ResetingPassword from "./pages/PassResetConf";
 import UserEdition from "./pages/UserEdition";
+import NotFound from "./pages/NotFound";
+import FilmPage from "./pages/FilmPage";
+import ExternalUser from "./pages/ExternalUser";
 
 function App(props) {
   const [authTokens, setAuthTokens] = useState();
@@ -22,17 +25,11 @@ function App(props) {
   return (
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <Router>
-        <div>
-          <ul>
-            <li>
-              <Link to="/">Home Page</Link>
-            </li>
-            <li>
-              <Link to="/sign-in">Sign In</Link>
-            </li>
-          </ul>
+        <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/preferences" component={UserEdition} />
+          <Route path="/film/:id" component={FilmPage} />
+          <Route path="/user/:uuid" component={ExternalUser} />
           {/* <PrivateRoute exact path="/" component={Home} /> */}
           <Route exact path="/sign-in" component={SignIn} />
           <Route path="/sign-in/:uuid/:token" component={SignIn} />
@@ -42,7 +39,8 @@ function App(props) {
             path="/password-reseting/:uuid/:token"
             component={ResetingPassword}
           />
-        </div>
+          <Route component={NotFound} />
+        </Switch>
       </Router>
     </AuthContext.Provider>
   );
