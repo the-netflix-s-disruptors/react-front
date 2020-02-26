@@ -73,7 +73,6 @@ export default function UserEdition() {
       })
         .then(res => res.json())
         .then(res => {
-          console.log(res);
           if (res.status === "SUCCESS") {
             setActivate(2);
             setPayload("Prefered Language Successfully changed !");
@@ -83,7 +82,6 @@ export default function UserEdition() {
           }
         });
     }
-    console.log(newAlignment);
   };
 
   function getUser() {
@@ -225,7 +223,6 @@ export default function UserEdition() {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         if (res.status === "SUCCESS") {
           setActivate(2);
           setPayload("Photo Successfully changed !");

@@ -13,7 +13,6 @@ import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { useAuth } from "../context/auth";
 import { API_ENDPOINT } from "../constant";
 import Copyright from "../components/Copyright";
 import Oauth from "../components/Oauth";
@@ -42,10 +41,9 @@ export default function SignIn(props) {
   const classes = useStyles();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setLoggedIn] = useState(false);
   const [isError, setIsError] = useState(false);
   const [activate, setActivate] = useState(0);
-  const { setAuthTokens } = useAuth();
+  const [logged, setLogged] = useState(false);
 
   function postLogin() {
     fetch(`${API_ENDPOINT}/auth/login`, {
@@ -60,15 +58,15 @@ export default function SignIn(props) {
       .then(res => res.json())
       .then(res => {
         if (res.uuid !== undefined) {
-          setAuthTokens(res.uuid);
-          setLoggedIn(true);
+          setLogged(true);
         } else setIsError(true);
       })
       .catch(e => {
         setIsError(true);
       });
   }
-  if (isLoggedIn) {
+
+  if (logged) {
     return <Redirect to="/" />;
   }
 
@@ -87,7 +85,6 @@ export default function SignIn(props) {
     )
       .then(res => res.json())
       .then(res => {
-        console.log(res.status);
         if (res.status === "SUCCESS") setActivate(2);
         else setActivate(1);
       });

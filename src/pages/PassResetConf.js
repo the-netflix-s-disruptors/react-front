@@ -64,7 +64,6 @@ export default function ResetPassword(props) {
         } else {
           setError("Verify your Infromation");
         }
-        console.log(res);
       });
   }
 

@@ -23,6 +23,14 @@ const FilmPage = props => {
       .then(res => {
         setMovieInfo(res);
       });
+    fetch(`${API_ENDPOINT}/movie/isee/${props.match.params.id}`, {
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      method: "GET"
+    });
   }
   if (movieInfo.id === undefined || movieInfo.id === null) getFilmInfo();
   return (

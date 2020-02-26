@@ -15,12 +15,10 @@ export default function ExternalUser(props) {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         setUser(res);
       });
   }
   if (user === null) getUser();
-  console.log(user);
   return (
     <div>
       <NavBar />

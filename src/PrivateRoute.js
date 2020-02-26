@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useAuth } from "./context/auth";
+import { API_ENDPOINT } from "./constant";
 
 function PrivateRoute({ component: Component, ...rest }) {
-  const { authTokens } = useAuth();
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        authTokens ? <Component {...props} /> : <Redirect to="/sign-in" />
-      }
-    />
-  );
+  const [log, setLog] = useState(null);
+
+  function AuthCheck() {
+    fetch(`${API_ENDPOINT}/user/me`, {
+      credentials: "include",
+      method: "GET"
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        if (res.uuid === undefined || res.uuid === null) {
+          console.log("ok");
+          setLog(false);
+        } else setLog(true);
+        console.log("pas ok");
+      });
+  }
+  if (log === null) AuthCheck();
+  if (log !== null && log === false) return <Redirect to="/sign-in" />;
+  return <Route {...rest} render={props => <Component {...props} />} />;
 }
 
 export default PrivateRoute;

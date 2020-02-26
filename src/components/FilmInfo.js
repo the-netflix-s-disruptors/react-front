@@ -46,7 +46,6 @@ export default function FilmInfo(props) {
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  let id = 0;
   return (
     <ExpansionPanel
       expanded={expanded === "panel1"}
@@ -117,9 +116,10 @@ export default function FilmInfo(props) {
                     <TableCell align="right">none</TableCell>
                   </TableRow>
 
-                  {props.movieInfo.casting !== undefined
-                    ? props.movieInfo.casting.map(actor => (
-                        <TableRow key={id++}>
+                  {props.movieInfo.casting !== undefined &&
+                  Array.isArray(props.movieInfo.casting)
+                    ? props.movieInfo.casting.map((actor, index) => (
+                        <TableRow key={index}>
                           <TableCell align="right">
                             <img alt="" src={actor.url_small_image} />
                           </TableCell>

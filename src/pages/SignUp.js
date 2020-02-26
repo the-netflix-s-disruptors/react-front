@@ -79,7 +79,6 @@ export default function SignUp() {
         } else {
           setError("Verify your Infromation");
         }
-        console.log(res);
       });
   }
 

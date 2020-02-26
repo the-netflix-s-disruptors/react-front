@@ -17,7 +17,6 @@ const FilmPlayer = props => {
       .then(res => res.json())
       .then(res => {
         setSub(res);
-        console.log(res);
       });
   };
   if (sub === null || sub.en === undefined) getSub();

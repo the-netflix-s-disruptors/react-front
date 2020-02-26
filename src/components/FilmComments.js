@@ -15,7 +15,7 @@ import { API_ENDPOINT, FRONT_ENDPOINT } from "../constant";
 
 export default function FilmComments(props) {
   const [comments, setComments] = useState(null);
-  const [newComments, setNewComments] = useState(null);
+  const [newComments, setNewComments] = useState("");
   function getComments() {
     fetch(`${API_ENDPOINT}/movie/comments/${props.id}`, {
       credentials: "include",
@@ -43,7 +43,6 @@ export default function FilmComments(props) {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         getComments();
       });
   }
@@ -74,8 +73,8 @@ export default function FilmComments(props) {
         </TableHead>
         <TableBody>
           {Array.isArray(comments) === true
-            ? comments.map(comment => (
-                <TableRow key={comment.username}>
+            ? comments.map((comment, index) => (
+                <TableRow key={index}>
                   <TableCell>
                     <Link href={`${FRONT_ENDPOINT}/user/${comment.uuid}`}>
                       <img alt="" src={comment.path} height="50px" />

@@ -280,53 +280,52 @@ export default function HomeList() {
         direction="row"
         spacing={4}
       >
-        {result.map(({ id, title, year, rating, image, isSeen }) => (
-          <Grid item key={id}>
-            <Card className={classes.root2}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image={image}
-                  title={title}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    {title}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    {isSeen === true ? <Visibility /> : <VisibilityOff />}
-                    <Rating name="simple-controlled" value={rating / 2} />
-                    {year}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button
-                  size="small"
-                  color="primary"
-                  href={`${FRONT_ENDPOINT}/film/${id}`}
-                >
-                  Learn More
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
+        {Array.isArray(result)
+          ? result.map(({ id, title, year, rating, image, isSeen }) => (
+              <Grid item key={id}>
+                <Card className={classes.root2}>
+                  <CardActionArea>
+                    <CardMedia
+                      className={classes.media}
+                      image={image}
+                      title={title}
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {title}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                      >
+                        {isSeen === true ? <Visibility /> : <VisibilityOff />}
+                        <Rating name="simple-controlled" value={rating / 2} />
+                        {year}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions>
+                    <Button
+                      size="small"
+                      color="primary"
+                      href={`${FRONT_ENDPOINT}/film/${id}`}
+                    >
+                      Learn More
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))
+          : "no result"}
       </Grid>
 
       <Button
         fullWidth
         component="button"
         onClick={() => {
-          console.log("limit:", limit);
           setLimit(limit + 9);
-          console.log("limit now:", limit);
           postReq();
-          console.log("limit posted");
         }}
       >
         MORE
