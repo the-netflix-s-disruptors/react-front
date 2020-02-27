@@ -12,17 +12,15 @@ function PrivateRoute({ component: Component, ...rest }) {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         if (res.uuid === undefined || res.uuid === null) {
-          console.log("ok");
+          console.log("disconnected");
           setLog(false);
         } else setLog(true);
-        console.log("pas ok");
       });
   }
   if (log === null) AuthCheck();
   if (log !== null && log === false) return <Redirect to="/sign-in" />;
-  return <Route {...rest} render={props => <Component {...props} />} />;
+  else return <Route {...rest} render={props => <Component {...props} />} />;
 }
 
 export default PrivateRoute;
